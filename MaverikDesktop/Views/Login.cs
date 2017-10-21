@@ -16,5 +16,15 @@ namespace MaverikDesktop.Views
         {
             InitializeComponent();
         }
+
+        private void nombreUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
