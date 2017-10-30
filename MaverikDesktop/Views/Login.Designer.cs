@@ -46,6 +46,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // nombreUsuario
             // 
@@ -59,6 +60,7 @@
             this.nombreUsuario.TabIndex = 1;
             this.nombreUsuario.Text = "Nombre de Usuario";
             this.nombreUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nombreUsuario.MouseClick += new System.Windows.Forms.MouseEventHandler(this.nombreUsuario_MouseClick);
             this.nombreUsuario.TextChanged += new System.EventHandler(this.nombreUsuario_TextChanged);
             // 
             // contraseñaUsuario
@@ -73,6 +75,8 @@
             this.contraseñaUsuario.TabIndex = 2;
             this.contraseñaUsuario.Text = "Contraseña";
             this.contraseñaUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.contraseñaUsuario.MouseClick += new System.Windows.Forms.MouseEventHandler(this.contraseñaUsuario_MouseClick);
+            this.contraseñaUsuario.TextChanged += new System.EventHandler(this.contraseñaUsuario_TextChanged);
             // 
             // linkLabel1
             // 
