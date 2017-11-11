@@ -10,13 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MaverikDesktop.Views
 {
     public partial class GenerarRutas : Form
     {
         private const string URL = "http://maverik-project.com";
-        private string urlParameters = "/api/v1/rutas/generar_ruta_de_distribucion"; //
+        private string urlParameters = "/api/v1/rutas/generar_cola_de_carga"; 
 
         public GenerarRutas()
         {
@@ -32,17 +34,21 @@ namespace MaverikDesktop.Views
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
             //This code lists the RESTful service response//
-            HttpResponseMessage response = client.GetAsync(URL+urlParameters).Result;
+            var response = client.GetAsync(urlParameters).Result;
             if(response.IsSuccessStatusCode)
             {
-                var dataObjects = response.Content.ReadAsAsync<IEnumerable<Models.Remito>>().Result;
-                foreach (Models.Remito d in dataObjects)
+                var jsonString = response.Content.ReadAsStringAsync();
+                Models.RootObject dataObject = JsonConvert.DeserializeObject<Models.RootObject>(jsonString.Result);
+                foreach (Models.ColaDeCarga d in dataObject.cola_de_carga)
                 {                    
-                    Console.WriteLine("{0}", d.Id);
-                    Console.WriteLine("{0}", d.Estado);
-                    Console.WriteLine("{0}", d.Pedido.Estado);
-                    Console.WriteLine("{0}", d.Comercio.Razon_Social);
-                    Console.WriteLine("{0}", d.Cliente.Nombre);
+                    Console.WriteLine("{0}", d.id);
+                    Console.WriteLine("{0}", d.estado_remito);
+                    Console.WriteLine("{0}", d.fecha_hora_entrega);
+                    Console.WriteLine("{0}", d.tiempo_estimado_entrega);
+                    Console.WriteLine("{0}", d.ubicacion_remito.id);
+                    Console.WriteLine("{0}", d.ubicacion_remito.domicilio);
+                    Console.WriteLine("{0}", d.zona_remito.id);
+                    Console.WriteLine("{0}", d.zona_remito.descripcion);
                 }
             }
             else

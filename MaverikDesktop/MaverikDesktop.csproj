@@ -59,11 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Comercio.cs" />
-    <Compile Include="Models\Pedido.cs" />
-    <Compile Include="Models\Remito.cs" />
+    <Compile Include="Models\RootObject.cs" />
+    <Compile Include="Models\ColaDeCarga.cs" />
+    <Compile Include="Models\UbicacionRemito.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ZonaRemito.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\GenerarRutas.cs">

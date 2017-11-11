@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    class Pedido
+    class RootObject
     {
-        private string estado;
-
-        public string Estado { get => estado; set => estado = value; }
+        public List<ColaDeCarga> cola_de_carga { get; set; }
     }
 }
