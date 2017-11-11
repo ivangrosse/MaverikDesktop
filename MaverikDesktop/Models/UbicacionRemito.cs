@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    class UbicacionRemito
+    public class UbicacionRemito
     {
         public int id { get; set; }
         public string domicilio { get; set; }

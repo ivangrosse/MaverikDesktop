@@ -39,17 +39,10 @@ namespace MaverikDesktop.Views
             {
                 var jsonString = response.Content.ReadAsStringAsync();
                 Models.RootObject dataObject = JsonConvert.DeserializeObject<Models.RootObject>(jsonString.Result);
-                foreach (Models.ColaDeCarga d in dataObject.cola_de_carga)
-                {                    
-                    Console.WriteLine("{0}", d.id);
-                    Console.WriteLine("{0}", d.estado_remito);
-                    Console.WriteLine("{0}", d.fecha_hora_entrega);
-                    Console.WriteLine("{0}", d.tiempo_estimado_entrega);
-                    Console.WriteLine("{0}", d.ubicacion_remito.id);
-                    Console.WriteLine("{0}", d.ubicacion_remito.domicilio);
-                    Console.WriteLine("{0}", d.zona_remito.id);
-                    Console.WriteLine("{0}", d.zona_remito.descripcion);
-                }
+
+                ColaDeCarga colaDeCarga = new ColaDeCarga(dataObject);
+                colaDeCarga.Show();
+                this.Hide();
             }
             else
             {

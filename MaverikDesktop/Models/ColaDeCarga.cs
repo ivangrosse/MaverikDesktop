@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    class ColaDeCarga
+    public class ColaDeCarga
     {
         public int id { get; set; }
         public string estado_remito { get; set; }

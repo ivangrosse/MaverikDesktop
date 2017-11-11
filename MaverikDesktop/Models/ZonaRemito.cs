@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    class ZonaRemito
+    public class ZonaRemito
     {
         public int id { get; set; }
         public string descripcion { get; set; }

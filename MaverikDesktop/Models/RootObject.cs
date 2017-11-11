@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    class RootObject
+    public class RootObject
     {
         public List<ColaDeCarga> cola_de_carga { get; set; }
     }
