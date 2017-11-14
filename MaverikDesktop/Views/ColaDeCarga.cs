@@ -26,14 +26,16 @@ namespace MaverikDesktop.Views
 
         private void Button_Click(object sender, EventArgs e)
         {
-            string identificador = Regex.Match(sender.ToString(), @"\d+").Value;
-            //foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
-            {
+            Button boton = (Button)sender;
+            string identificador = Regex.Match(boton.Name, @"\d+").Value;
+            
+            
+            
                 foreach(Models.Remito r in colaDeCarga1.remitos)
                 {
                     {
-                        //for (int i = 0; i < r.cantidad_paquetes; i++)
-                        {
+                        
+                        
                             if (r.id == Int32.Parse(identificador))
                             {
                                     detalleRemito.Text = "Detalle de Remito: " + r.id.ToString() +
@@ -41,33 +43,65 @@ namespace MaverikDesktop.Views
                                     "\n" + "Ubicacion: " + r.ubicacion_remito_domicilio +
                                     "\n" + "Zona: " + r.zona_remito_descripcion;                                    
                             }
-                        }
+                        
                     }
                 }                
-            }
+            
         }
 
         private void ColaDeCarga_Load(object sender, EventArgs e)
         {
             List<Button> buttons = new List<Button>();            
-            //foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
-            {
+            
+            
                 int contador = 0;
                 int x = 50; int y = 50;
+                
                 foreach (Models.Remito r in colaDeCarga1.remitos)
                 {
-                    
-                   
-                    //foreach (Models.Remito r in cdc.remito)
+
+                    int contadorSeccoCola = 0;
+                    int contadorSeccoLimon = 0;
+                    int contadorSeccoPomelo = 0;
+                    int contadorSeccoTradicional = 0;                    
                     {                        
-                        for(int i = 0; i< r.cantidad_paquetes; i++)
+                        for(int i = 0; i< r.paquetes.cantidad_paquetes_total; i++)
                         {
                             contador++;
+                            
                             Button newButton = new Button();
-                            newButton.Text = r.id.ToString();
+                            if (contadorSeccoCola < r.paquetes.cantidad_cola)
+                            {
+                                newButton.Text = "SC";
+                                contadorSeccoCola++;
+                            }
+                            else
+                            {
+                                if (contadorSeccoLimon < r.paquetes.cantidad_limon)
+                                {
+                                    newButton.Text = "SL";
+                                    contadorSeccoLimon++;
+                                }
+                                else
+                                {
+                                    if(contadorSeccoPomelo < r.paquetes.cantidad_pomelo)
+                                    {
+                                        newButton.Text = "SP";
+                                        contadorSeccoPomelo++;
+                                    }
+                                    else
+                                    {
+                                        if(contadorSeccoTradicional < r.paquetes.cantidad_pomelo)
+                                        {
+                                            newButton.Text = "ST";
+                                            contadorSeccoTradicional++;
+                                        }
+                                    }
+                                }
+                            }                            
                             newButton.Font = new Font(newButton.Font.FontFamily, 15);
                             newButton.Location = new Point(x, y);
-                            newButton.Name = "paquete" + r.id.ToString();
+                            newButton.Name = r.id.ToString();
                             newButton.Click += Button_Click;
                             newButton.Size = new Size(60, 30);
                             buttons.Add(newButton);
@@ -81,12 +115,11 @@ namespace MaverikDesktop.Views
                                 y = y + 40;
                                 x = 50;
                                 contador = 0;
-                            }
-                            //contador++;
+                            }                           
                         }                        
                     }
                 }                
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -96,24 +129,77 @@ namespace MaverikDesktop.Views
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
             XFont font = new XFont("Verdana", 10, XFontStyle.Bold);
-            int x = -200; int y = -400;
-            int aux = 0;
-           // foreach(Models.ColaDeCarga cdc in ColaDeCarga1.cola_de_carga)
+            int unidad = 0;
+            foreach(Models.Remito r in colaDeCarga1.remitos)
+            {
+                unidad = r.unidad_de_distribucion_id;                
+            }
+            graph.DrawString("Cola de Carga" , new XFont("Verdana", 18, XFontStyle.Bold),
+                XBrushes.Black, new XRect(0, -400, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.Center);
+            graph.DrawString("Unidad de Distribucion "+unidad, new XFont("Verdana", 10, XFontStyle.Bold),
+                XBrushes.Black, new XRect(0, -350, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.Center);
+            int x = -200; int y = -200;
+            int aux = 0;           
             {
                 foreach(Models.Remito r in colaDeCarga1.remitos)
                 {
-                    for(int i=0; i<r.cantidad_paquetes; i++)
+                    int contadorSeccoCola = 0;
+                    int contadorSeccoLimon = 0;
+                    int contadorSeccoPomelo = 0;
+                    int contadorSeccoTradicional = 0;
+                    for (int i=0; i<r.paquetes.cantidad_paquetes_total; i++)
                     {
                         int idPaquete = i+1;
                         aux = aux + 1;
-                        graph.DrawString("Paquete: " + idPaquete + " Remito: "+ r.id.ToString(), font, XBrushes.Black, new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
-                        //agregar aquello que se necesite en el pdf//
+                        if (contadorSeccoCola < r.paquetes.cantidad_cola)
+                        {
+                            graph.DrawString("Paquete: " + idPaquete + " SC " + " Remito: " 
+                                + r.id.ToString(), font, XBrushes.Black, 
+                                new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point), 
+                                XStringFormats.Center);
+                            contadorSeccoCola++;
+                        }
+                        else
+                        {
+                            if (contadorSeccoLimon < r.paquetes.cantidad_limon)
+                            {
+                                graph.DrawString("Paquete: " + idPaquete + " SL "+" Remito: " 
+                                    + r.id.ToString(), font, XBrushes.Black,
+                                    new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point),
+                                    XStringFormats.Center);
+                                contadorSeccoLimon++;
+                            }
+                            else
+                            {
+                                if (contadorSeccoPomelo < r.paquetes.cantidad_pomelo)
+                                {
+                                    graph.DrawString("Paquete: " + idPaquete + " SP "+" Remito: "
+                                        + r.id.ToString(), font, XBrushes.Black,
+                                        new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point),
+                                        XStringFormats.Center);
+                                    contadorSeccoPomelo++;
+                                }
+                                else
+                                {
+                                    if (contadorSeccoTradicional < r.paquetes.cantidad_pomelo)
+                                    {
+                                        graph.DrawString("Paquete: " + idPaquete + " ST "+" Remito: "
+                                            + r.id.ToString(), font, XBrushes.Black,
+                                            new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point),
+                                            XStringFormats.Center);
+                                        contadorSeccoTradicional++;
+                                    }
+                                }
+                            }
+                        }                   
                         y = y + 25;
                         if (aux == 20)
                         {
                             x = x + 200;
                             aux = 0;
-                            y = -400;
+                            y = -200;
                         }
                     }
                 }

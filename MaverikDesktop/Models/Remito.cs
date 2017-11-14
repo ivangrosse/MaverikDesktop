@@ -14,11 +14,10 @@ namespace MaverikDesktop.Models
         public string estado_remito { get; set; }
         public DateTime fecha_hora_entrega { get; set; }
         public DateTime tiempo_estimado_entrega { get; set; }
-        public int cantidad_paquetes { get; set; }
+        public Paquetes paquetes { get; set; }
         public int ubicacion_remito_id { get; set; }
         public string ubicacion_remito_domicilio { get; set; }
         public int zona_remito_id { get; set; }
         public string zona_remito_descripcion { get; set; }
     }
-
 }

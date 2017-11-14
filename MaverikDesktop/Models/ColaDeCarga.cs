@@ -11,4 +11,5 @@ namespace MaverikDesktop.Models
     {
         public List<Remito> remitos { get; set; }
     }
+
 }
