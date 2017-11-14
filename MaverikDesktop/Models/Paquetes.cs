@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MaverikDesktop.Models
 {
-    public class RootObject
+    public class Paquetes
     {
-        public List<ColaDeCarga> cola_de_carga { get; set; }
+        public int cantidad { get; set; }
     }
 }

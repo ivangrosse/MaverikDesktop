@@ -41,6 +41,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -58,9 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\RootObject.cs" />
     <Compile Include="Models\ColaDeCarga.cs" />
+    <Compile Include="Models\ColasDeCarga.cs" />
+    <Compile Include="Models\Paquetes.cs" />
+    <Compile Include="Models\Remito.cs" />
+    <Compile Include="Models\RootObject.cs" />
     <Compile Include="Models\UbicacionRemito.cs" />
+    <Compile Include="Models\UnidadDeDistribucion.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ZonaRemito.cs" />
     <Compile Include="Program.cs" />

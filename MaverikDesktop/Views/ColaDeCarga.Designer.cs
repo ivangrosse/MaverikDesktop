@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.detalleRemito = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // detalleRemito
@@ -40,11 +41,22 @@
             this.detalleRemito.TabIndex = 0;
             this.detalleRemito.Text = "label1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(496, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Print";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ColaDeCarga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 378);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.detalleRemito);
             this.Name = "ColaDeCarga";
             this.Text = "Cola de carga";
@@ -57,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.Label detalleRemito;
+        private System.Windows.Forms.Button button1;
     }
 }
