@@ -51,8 +51,10 @@ namespace MaverikDesktop.Views
                         
                     }
                 }
-                ColaDeCarga colaDeCarga = new ColaDeCarga(dataObject);
-                colaDeCarga.Show();
+                //ColaDeCarga colaDeCarga = new ColaDeCarga(dataObject);
+                //colaDeCarga.Show();
+                ListaCamiones listaCamiones = new ListaCamiones(dataObject);
+                listaCamiones.Show();
                 this.Hide();
             }
             else

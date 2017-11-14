@@ -15,10 +15,10 @@ namespace MaverikDesktop.Views
 {
     public partial class ColaDeCarga : Form
     {
-        private Models.RootObject colaDeCarga1 = new Models.RootObject();
-        public Models.RootObject ColaDeCarga1 { get => colaDeCarga1; set => colaDeCarga1 = value; }
+        private Models.ColaDeCarga colaDeCarga1 = new Models.ColaDeCarga();
+        public Models.ColaDeCarga ColaDeCarga1 { get => colaDeCarga1; set => colaDeCarga1 = value; }
 
-        public ColaDeCarga(Models.RootObject value)
+        public ColaDeCarga(Models.ColaDeCarga value)
         {
             InitializeComponent();
             ColaDeCarga1 = value;
@@ -27,13 +27,12 @@ namespace MaverikDesktop.Views
         private void Button_Click(object sender, EventArgs e)
         {
             string identificador = Regex.Match(sender.ToString(), @"\d+").Value;
-            foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
+            //foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
             {
-                foreach(Models.Remito r in cdc.remitos)
+                foreach(Models.Remito r in colaDeCarga1.remitos)
                 {
-                    //foreach(Models.Remito r in cdc.remito)
                     {
-                        for (int i = 0; i < r.cantidad_paquetes; i++)
+                        //for (int i = 0; i < r.cantidad_paquetes; i++)
                         {
                             if (r.id == Int32.Parse(identificador))
                             {
@@ -51,36 +50,39 @@ namespace MaverikDesktop.Views
         private void ColaDeCarga_Load(object sender, EventArgs e)
         {
             List<Button> buttons = new List<Button>();            
-            foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
+            //foreach (Models.ColaDeCarga cdc in colaDeCarga1.cola_de_carga)
             {
-                foreach(Models.Remito r in cdc.remitos)
+                int contador = 0;
+                int x = 50; int y = 50;
+                foreach (Models.Remito r in colaDeCarga1.remitos)
                 {
-                    int x = 50; int y = 50;
-                    int contador = 0;
+                    
+                   
                     //foreach (Models.Remito r in cdc.remito)
                     {                        
                         for(int i = 0; i< r.cantidad_paquetes; i++)
                         {
+                            contador++;
                             Button newButton = new Button();
                             newButton.Text = r.id.ToString();
                             newButton.Font = new Font(newButton.Font.FontFamily, 15);
                             newButton.Location = new Point(x, y);
                             newButton.Name = "paquete" + r.id.ToString();
                             newButton.Click += Button_Click;
-                            newButton.Size = new Size(25, 25);
+                            newButton.Size = new Size(60, 30);
                             buttons.Add(newButton);
                             this.Controls.Add(newButton);
                             if (contador < 18)
                             {
-                                x = x + 25;
+                                x = x + 60;
                             }
                             else
                             {
-                                y = y + 25;
+                                y = y + 40;
                                 x = 50;
                                 contador = 0;
                             }
-                            contador++;
+                            //contador++;
                         }                        
                     }
                 }                
@@ -93,15 +95,26 @@ namespace MaverikDesktop.Views
             pdf.Info.Title = "Cola de Carga";
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-            XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
-            foreach(Models.ColaDeCarga cdc in ColaDeCarga1.cola_de_carga)
+            XFont font = new XFont("Verdana", 10, XFontStyle.Bold);
+            int x = -200; int y = -400;
+            int aux = 0;
+           // foreach(Models.ColaDeCarga cdc in ColaDeCarga1.cola_de_carga)
             {
-                foreach(Models.Remito r in cdc.remitos)
+                foreach(Models.Remito r in colaDeCarga1.remitos)
                 {
-                    //foreach(Models.Remito r in cdc.remito)
+                    for(int i=0; i<r.cantidad_paquetes; i++)
                     {
-                        graph.DrawString(r.id.ToString(), font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                        int idPaquete = i+1;
+                        aux = aux + 1;
+                        graph.DrawString("Paquete: " + idPaquete + " Remito: "+ r.id.ToString(), font, XBrushes.Black, new XRect(x, y, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
                         //agregar aquello que se necesite en el pdf//
+                        y = y + 25;
+                        if (aux == 20)
+                        {
+                            x = x + 200;
+                            aux = 0;
+                            y = -400;
+                        }
                     }
                 }
             }            

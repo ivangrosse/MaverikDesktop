@@ -37,9 +37,8 @@
             this.detalleRemito.AutoSize = true;
             this.detalleRemito.Location = new System.Drawing.Point(33, 285);
             this.detalleRemito.Name = "detalleRemito";
-            this.detalleRemito.Size = new System.Drawing.Size(35, 13);
+            this.detalleRemito.Size = new System.Drawing.Size(0, 13);
             this.detalleRemito.TabIndex = 0;
-            this.detalleRemito.Text = "label1";
             // 
             // button1
             // 
@@ -55,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 378);
+            this.ClientSize = new System.Drawing.Size(877, 378);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.detalleRemito);
             this.Name = "ColaDeCarga";

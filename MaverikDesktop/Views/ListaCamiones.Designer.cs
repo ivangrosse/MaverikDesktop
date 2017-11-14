@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(862, 323);
             this.Name = "ListaCamiones";
             this.Text = "ListaCamiones";
+            this.Load += new System.EventHandler(this.ListaCamiones_Load);
             this.ResumeLayout(false);
 
         }
